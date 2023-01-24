@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- Denna styling var INTE en del av övningen! -->
+    <style>
+        body {
+            padding-top: 50px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        #email,
+        #country,
+        #utype {
+            min-width: 100%;
+        }
+
+        #fname,
+        #lname,
+        #pword,
+        #cpword {
+            min-width: 48%;
+        }
+
+        #special-div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        form {
+            background-color: lightgray;
+            padding: 15px;
+        }
+
+        h2 {
+            color: orangered;
+        }
+
+        p {
+            color: gray;
+        }
+
+        button {
+            background-color: orangered;
+            color: white;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    {% for field, errors in form.errors.items() %}
+       {{ form[field].label }}: {{ ', '.join(errors) }}
+       </br>
+    {% endfor %}
+    
+
+
+    <form  method="post">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <h2>NEW USER REGISTER HERE</h2>
+            <p>Please fill out the following information</p>
+
+            <input type="email" name="email" class="mb-3" id="email" placeholder="Enter Email" />
+
+            <div id="special-div">
+                {{ form.fname(class="mb-3 input-text", placeholder="First Name")  }}
+               {{ form.lname(class="mb-3 input-text", placeholder="Last Name")  }}
+            </div>
+
+            <div id="special-div">
+                {{ form.pword(class="mb-3 input-text", placeholder="Enter Password")  }}
+                {{ form.cpword(class="mb-3 input-text", placeholder="Confirm Password")  }}
+            </div>
+
+            {{ form.country(class="mb-3")  }}
+            {{ form.utype(class="mb-3")  }}
+            <div>
+                <button class="btn rounded-0">Register Me</button>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+
+</body>
+
+</html>
